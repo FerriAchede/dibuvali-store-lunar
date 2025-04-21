@@ -8,8 +8,10 @@
     "require": {
         "php": "^8.2",
         "laravel/framework": "^12.0",
+        "laravel/scout": "^10.14",
         "laravel/tinker": "^2.10.1",
-        "lunarphp/lunar": "^1.0.0-beta"
+        "lunarphp/lunar": "^1.0.0-beta",
+        "lunarphp/meilisearch": "^1.0@beta"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",

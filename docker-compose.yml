@@ -10,6 +10,7 @@ services:
       - .env
     depends_on:
       - db
+      - meilisearch
     working_dir: /var/www
     command: php artisan serve --host=0.0.0.0 --port=8000
 
@@ -24,5 +25,15 @@ services:
     volumes:
       - mysql_data:/var/lib/mysql
 
+  meilisearch:
+    image: getmeili/meilisearch:v1.14
+    environment:
+      MEILI_MASTER_KEY: ${MEILISEARCH_KEY}
+    ports:
+      - "7700:7700"
+    volumes:
+      - meili_data:/meili_data
+
 volumes:
   mysql_data:
+  meili_data:
