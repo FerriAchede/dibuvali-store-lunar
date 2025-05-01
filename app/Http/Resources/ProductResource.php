@@ -7,13 +7,32 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class ProductResource extends JsonResource
 {
-    /**
-     * Transform the resource into an array.
-     *
-     * @return array<string, mixed>
-     */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        $price = $this->variant?->prices->first()?->price;
+
+        $value = $price->value;
+        $currency = $price->currency;
+
+        $formattedPrice = number_format(
+            ($value / (10 ** $currency['decimal_places'])) * $currency['exchange_rate'],
+            $currency['decimal_places']
+        );
+        $currencyCode = $currency['code'];
+
+
+        $defaultImage = $this->images->first()?->getUrl('small');
+        $hoverImage = $this->images->get(1)?->getUrl('small');
+
+
+        return [
+            'id' => $this->id,
+            'slug' => $this->urls->first()?->slug,
+            'title' => $this->translateAttribute('name'),
+            'price' => $formattedPrice,
+            'currency_code' => $currencyCode,
+            'image' => $defaultImage,
+            'hover_image' => $hoverImage,            
+        ];
     }
 }
