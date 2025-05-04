@@ -11,7 +11,10 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::where('status', 'published')->with(['images', 'variant.prices', 'urls'])->get();
+        $products = Product::where('status', 'published')
+        ->with(['images', 'variant.prices', 'urls'])
+        ->paginate(2);
+        
         return ProductResource::collection($products);
     }
 
