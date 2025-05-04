@@ -21,8 +21,8 @@ class ProductResource extends JsonResource
         $currencyCode = $currency['code'];
 
 
-        $defaultImage = $this->images->first()?->getUrl('small');
-        $hoverImage = $this->images->get(1)?->getUrl('small');
+        $defaultImage = $this->images->first()?->getUrl();
+        $hoverImage = $this->images->get(1)?->getUrl();
 
 
         return [
