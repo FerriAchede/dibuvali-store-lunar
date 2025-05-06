@@ -18,5 +18,22 @@ class ProductController extends Controller
         return ProductResource::collection($products);
     }
 
+    public function show($slug)
+    {
+        $product = Product::whereHas('urls', function ($query) use ($slug) {
+                $query->where('slug', $slug);
+            })
+            ->with([
+                'images',
+                'urls',
+                'tags',
+                'productType',
+                'brand',
+                'variants.prices.currency',
+            ])
+            ->where('status', 'published')
+            ->firstOrFail();
 
+        return new ProductDetailResource($product);
+    }
 }

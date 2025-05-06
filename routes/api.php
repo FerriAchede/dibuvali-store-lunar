@@ -11,5 +11,5 @@ Route::prefix('products')->group(function () {
     // Route::get('/brand/{id}', [ProductController::class, 'byBrand']);
     // Route::get('/type/{id}', [ProductController::class, 'byType']);
     // Route::get('/popular', [ProductController::class, 'popular']);
-    // Route::get('/{slug}', [ProductController::class, 'show']);
+    Route::get('/{slug}', [ProductController::class, 'show']);
 });
