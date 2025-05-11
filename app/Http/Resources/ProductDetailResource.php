@@ -14,7 +14,7 @@ class ProductDetailResource extends JsonResource
         $price = $variant?->prices->first();
         // $stock = $variant?->stocks->sum('quantity') ?? 0;
 
-        $priceValue = $price->value ?? 0;
+        $priceValue = $price->price->value ?? 0;
         $currency = $price->currency ?? null;
 
         $formattedPrice = $currency
