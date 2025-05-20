@@ -37,6 +37,7 @@ class ProductDetailResource extends JsonResource
             'currency_code' => $currency?->code,
             'image' => $this->images->first()?->getUrl(),
             'images' => $this->images->map(fn($img) => $img->getUrl()),
+            'variant_id' => $variant?->id
         ];
     }
 }

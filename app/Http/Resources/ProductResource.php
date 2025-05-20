@@ -8,8 +8,9 @@ use Illuminate\Http\Resources\Json\JsonResource;
 class ProductResource extends JsonResource
 {
     public function toArray(Request $request): array
-    {
-        $price = $this->variant?->prices->first()?->price;
+    {   
+        $variant = $this->variant;
+        $price = $variant?->prices->first()?->price;
 
         $value = $price->value;
         $currency = $price->currency;
@@ -32,7 +33,8 @@ class ProductResource extends JsonResource
             'price' => $formattedPrice,
             'currency_code' => $currencyCode,
             'image' => $defaultImage,
-            'hover_image' => $hoverImage,            
+            'hover_image' => $hoverImage,
+            'variant_id' => $variant->id
         ];
     }
 }
