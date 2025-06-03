@@ -41,16 +41,19 @@ class CartController extends Controller
                         'variant_id' => $variant->id ?? null,
                         'title' => $product->translateAttribute('name') ?? null,
                         'slug' => $product->urls->first()->slug ?? null,
-                        'description' => $product->translateAttribute('description') ?? null,
+                        'description' => $product->translateAttribute('description') ?: $product->description ?? null,
                         'price' => optional($line->purchasable->prices->first())->price->formatted ?? '0.00',
+                        'stock' => $variant->stock ?? 0,
                         'quantity' => $line->quantity ?? 0,
                         'image' => optional($variant->product->thumbnail)->original_url ?? null,
                     ];
                 }),
                 'totals' => [
-                    'subTotal' => $cart->subTotal->value->formatted ?? 0,
-                    'tax' => $cart->taxTotal->value ?? 0,
-                    'total' => $cart->total->value ?? 0,
+                    'subTotal' => $cart->subTotal->formatted ?? 0,
+                    'discount_total' => $cart->discount_total->formatted ?? 0,
+                    'shipping_total' => $cart->shipping_total->formatted ?? 0,
+                    'tax' => $cart->taxTotal->formatted ?? 0,
+                    'total' => $cart->total->formatted ?? 0,
                 ],
             ]
         ]);
