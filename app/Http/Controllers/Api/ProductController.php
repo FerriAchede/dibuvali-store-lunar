@@ -12,17 +12,17 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::where('status', 'published')
-        ->with(['images', 'variant.prices', 'urls'])
-        ->paginate(2);
-        
+            ->with(['images', 'variant.prices', 'urls'])
+            ->paginate(2);
+
         return ProductResource::collection($products);
     }
 
     public function show($slug)
     {
         $product = Product::whereHas('urls', function ($query) use ($slug) {
-                $query->where('slug', $slug);
-            })
+            $query->where('slug', $slug);
+        })
             ->with([
                 'images',
                 'urls',
@@ -35,5 +35,16 @@ class ProductController extends Controller
             ->firstOrFail();
 
         return new ProductDetailResource($product);
+    }
+
+    public function newest()
+    {
+        $products = Product::where('status', 'published')
+            ->with(['images', 'variant.prices.currency', 'urls'])
+            ->orderBy('created_at', 'desc')
+            ->take(12)
+            ->get();
+
+        return ProductResource::collection($products);
     }
 }

@@ -12,7 +12,7 @@ use Lunar\DataTransferObjects\Cart as CartData;
 Route::middleware('frontend')->group(function () {
     Route::prefix('products')->group(function () {
         Route::get('/', [ProductController::class, 'index']);
-        // Route::get('/newest', [ProductController::class, 'newest']);
+        Route::get('/newest', [ProductController::class, 'newest']);
         // Route::get('/brand/{id}', [ProductController::class, 'byBrand']);
         // Route::get('/type/{id}', [ProductController::class, 'byType']);
         // Route::get('/popular', [ProductController::class, 'popular']);
