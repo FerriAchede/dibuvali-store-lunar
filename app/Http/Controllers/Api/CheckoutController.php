@@ -7,16 +7,9 @@ use Lunar\Facades\CartSession;
 use App\Http\Controllers\Controller;
 use App\Modifiers\CustomShippingModifier;
 use Illuminate\Support\Facades\Log;
-use Lunar\DataTypes\Price;
-use Lunar\DataTypes\ShippingOption;
 use Lunar\Facades\Payments;
 use Lunar\Facades\ShippingManifest;
-use Lunar\Models\Cart;
-use Lunar\Models\Channel;
-use Lunar\Models\Currency;
 use Lunar\Models\Order;
-use Lunar\Models\ProductVariant;
-use Lunar\Models\TaxClass;
 
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Mail\OrderInvoiceMail;
@@ -145,12 +138,19 @@ class CheckoutController extends Controller
         // Borrar sesión del carrito
         CartSession::forget();
 
-        $pdf = Pdf::loadView('emails.orders.invoice', [
-            'order' => $order
-        ])->output();
+        try {
+            $pdf = Pdf::loadView('emails.orders.invoice', [
+                'order' => $order
+            ])->output();
         
-        Mail::to($validated['billing_address']['email'])->send(new OrderInvoiceMail($order, $pdf));
-        
+            Mail::to($validated['billing_address']['email'])->send(new OrderInvoiceMail($order, $pdf));
+        } catch (\Throwable $e) {
+            Log::error('Error al enviar el correo con la factura del pedido', [
+                'order_id' => $order->id,
+                'error' => $e->getMessage(),
+            ]);
+        }
+
         Log::info('Pedido realizado con éxito', [
             'order' => $order,
         ]);

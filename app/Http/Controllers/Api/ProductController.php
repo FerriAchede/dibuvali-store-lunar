@@ -34,7 +34,27 @@ class ProductController extends Controller
             ->where('status', 'published')
             ->firstOrFail();
 
-        return new ProductDetailResource($product);
+        $previous = Product::where('status', 'published')
+            ->where('id', '<', $product->id)
+            ->orderBy('id', 'desc')
+            ->with('urls')
+            ->first();
+
+        $next = Product::where('status', 'published')
+            ->where('id', '>', $product->id)
+            ->orderBy('id', 'asc')
+            ->with('urls')
+            ->first();
+
+        return response()->json([
+            'data' => new ProductDetailResource($product),
+            'previous' => $previous
+                ? $previous->urls->first()?->slug
+                : null,
+            'next' => $next
+                ? $next->urls->first()?->slug
+                : null,
+        ]);
     }
 
     public function newest()

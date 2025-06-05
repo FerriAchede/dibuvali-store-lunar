@@ -41,7 +41,7 @@ class OrderInvoiceMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Order Invoice Mail',
+            subject: 'Factura de tu pedido',
         );
     }
 
