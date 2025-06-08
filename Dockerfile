@@ -1,5 +1,8 @@
 FROM php:8.3-fpm
 
+ARG APP_ENV=production
+
+# Instala dependencias del sistema
 RUN apt-get update && apt-get install -y \
     libpng-dev \
     libjpeg-dev \
@@ -22,8 +25,27 @@ RUN apt-get update && apt-get install -y \
     zip \
     intl \
     bcmath \
-    exif
+    exif \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www
+
+COPY composer.json composer.lock ./
+
+RUN if [ "$APP_ENV" = "production" ]; then \
+        composer install --no-dev --optimize-autoloader --no-interaction; \
+    else \
+        composer install --prefer-dist --no-interaction; \
+    fi
+
+COPY . .
+
+RUN chown -R www-data:www-data /var/www \
+    && chmod -R 755 /var/www/storage \
+    && chmod -R 755 /var/www/bootstrap/cache
+
+EXPOSE 9000
+
+CMD ["php-fpm"]

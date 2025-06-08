@@ -9,6 +9,16 @@ return [
             'driver' => 'offline',
             'authorized' => 'payment-offline',
         ],
+
+        'bizum' => [
+            'driver' => 'offline',
+            'released' => 'payment-offline',
+        ],
+
+        'card' => [
+            'driver' => 'stripe',
+            'released' => 'payment-received',
+        ],
     ],
 
 ];

@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Modifiers\CustomShippingModifier;
 use Illuminate\Support\ServiceProvider;
 use Lunar\Admin\Support\Facades\LunarPanel;
 
@@ -18,8 +19,10 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Bootstrap any application services.
      */
-    public function boot(): void
+    public function boot(\Lunar\Base\ShippingModifiers $shippingModifiers)
     {
-        //
+        $shippingModifiers->add(
+            CustomShippingModifier::class
+        );
     }
 }

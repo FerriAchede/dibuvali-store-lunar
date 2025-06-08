@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0f49bcc7cf665133ab16f70372e601b3",
+    "content-hash": "f744f0eb7c9aa17d18f8f7bb14925a1a",
     "packages": [
         {
             "name": "amphp/amp",
@@ -5282,6 +5282,74 @@
             "time": "2025-02-26T13:10:01+00:00"
         },
         {
+            "name": "lunarphp/stripe",
+            "version": "1.0.0-beta20",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lunarphp/stripe.git",
+                "reference": "91da84685f825365c4b594b869d3b0d4b52045c6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/lunarphp/stripe/zipball/91da84685f825365c4b594b869d3b0d4b52045c6",
+                "reference": "91da84685f825365c4b594b869d3b0d4b52045c6",
+                "shasum": ""
+            },
+            "require": {
+                "lunarphp/core": "self.version",
+                "php": "^8.2",
+                "stripe/stripe-php": "^16.0"
+            },
+            "type": "project",
+            "extra": {
+                "lunar": {
+                    "name": "Stripe Payments"
+                },
+                "laravel": {
+                    "providers": [
+                        "Lunar\\Stripe\\StripePaymentsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Lunar\\Stripe\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Lunar",
+                    "homepage": "https://lunarphp.io/"
+                }
+            ],
+            "description": "Stripe payment driver for Lunar.",
+            "keywords": [
+                "cart",
+                "e-commerce",
+                "ecommerce",
+                "headless",
+                "laravel",
+                "lunarphp",
+                "shop",
+                "store",
+                "stripe"
+            ],
+            "support": {
+                "source": "https://github.com/lunarphp/stripe/tree/1.0.0-beta20"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/lunar",
+                    "type": "github"
+                }
+            ],
+            "time": "2025-04-09T09:38:13+00:00"
+        },
+        {
             "name": "maennchen/zipstream-php",
             "version": "3.1.2",
             "source": {
@@ -8076,6 +8144,65 @@
                 }
             ],
             "time": "2025-01-13T13:04:43+00:00"
+        },
+        {
+            "name": "stripe/stripe-php",
+            "version": "v16.6.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/stripe/stripe-php.git",
+                "reference": "d6de0a536f00b5c5c74f36b8f4d0d93b035499ff"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/stripe/stripe-php/zipball/d6de0a536f00b5c5c74f36b8f4d0d93b035499ff",
+                "reference": "d6de0a536f00b5c5c74f36b8f4d0d93b035499ff",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-json": "*",
+                "ext-mbstring": "*",
+                "php": ">=5.6.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "3.5.0",
+                "phpstan/phpstan": "^1.2",
+                "phpunit/phpunit": "^5.7 || ^9.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Stripe\\": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Stripe and contributors",
+                    "homepage": "https://github.com/stripe/stripe-php/contributors"
+                }
+            ],
+            "description": "Stripe PHP Library",
+            "homepage": "https://stripe.com/",
+            "keywords": [
+                "api",
+                "payment processing",
+                "stripe"
+            ],
+            "support": {
+                "issues": "https://github.com/stripe/stripe-php/issues",
+                "source": "https://github.com/stripe/stripe-php/tree/v16.6.0"
+            },
+            "time": "2025-02-24T22:35:29+00:00"
         },
         {
             "name": "symfony/clock",
@@ -12992,13 +13119,14 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "lunarphp/meilisearch": 10
+        "lunarphp/meilisearch": 10,
+        "lunarphp/stripe": 10
     },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
         "php": "^8.2"
     },
-    "platform-dev": {},
+    "platform-dev": [],
     "plugin-api-version": "2.6.0"
 }
