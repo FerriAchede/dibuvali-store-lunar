@@ -1,8 +1,5 @@
 FROM php:8.3-fpm
 
-ARG APP_ENV=production
-
-# Instala dependencias del sistema
 RUN apt-get update && apt-get install -y \
     libpng-dev \
     libjpeg-dev \
@@ -32,15 +29,13 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www
 
-COPY composer.json composer.lock ./
+COPY . .
 
 RUN if [ "$APP_ENV" = "production" ]; then \
         composer install --no-dev --optimize-autoloader --no-interaction; \
     else \
         composer install --prefer-dist --no-interaction; \
     fi
-
-COPY . .
 
 RUN chown -R www-data:www-data /var/www \
     && chmod -R 755 /var/www/storage \
