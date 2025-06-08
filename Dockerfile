@@ -1,5 +1,8 @@
 FROM php:8.3-fpm
 
+ARG APP_ENV=production
+ENV APP_ENV=${APP_ENV}
+
 RUN apt-get update && apt-get install -y \
     libpng-dev \
     libjpeg-dev \
