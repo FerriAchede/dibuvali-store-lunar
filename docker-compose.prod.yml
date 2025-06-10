@@ -32,6 +32,8 @@ services:
     volumes:
       - .:/var/www
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - /etc/ssl/certs/dibuvali.crt:/etc/ssl/certs/dibuvali.crt:ro
+      - /etc/ssl/private/dibuvali.key:/etc/ssl/private/dibuvali.key:ro
     depends_on:
       app:
         condition: service_healthy
@@ -39,7 +41,7 @@ services:
     networks:
       - app-network
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost"]
+      test: ["CMD", "curl", "-f", "-k", "https://localhost"]
       interval: 30s
       timeout: 10s
       retries: 3
