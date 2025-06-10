@@ -19,7 +19,7 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['http://localhost:3000', 'http://192.168.1.35:3000'],
+    'allowed_origins' => ['https://dibuvali-store-nuxt.vercel.app', 'http://localhost:3000', 'http://192.168.1.35:3000', 'https://3.227.186.31'],
 
     'allowed_origins_patterns' => [],
 
