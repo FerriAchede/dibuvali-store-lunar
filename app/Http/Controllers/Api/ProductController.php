@@ -13,7 +13,7 @@ class ProductController extends Controller
     {
         $products = Product::where('status', 'published')
             ->with(['images', 'variant.prices', 'urls'])
-            ->paginate(2);
+            ->paginate(8);
 
         return ProductResource::collection($products);
     }
